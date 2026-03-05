@@ -7,16 +7,25 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - What did the game look like the first time you ran it?
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
+I first read the instructions to understand what the game is about and tried playing it, i noticied the following;
+
+- the logic what wrong it just kept saying go lower even with negative numbers.
+- It allows the input of negative numbers. 
+- It automatically just say go lower and does not register the first input submission  
+- the New game does not clear previous inputs to start fresh. 
+
+
 
 ---
 
 ## 2. How did you use AI as a teammate?
 
-- Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
+- Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?  
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
 ---
+I used claude as my teammate. 
 
 ## 3. Debugging and testing your fixes
 
