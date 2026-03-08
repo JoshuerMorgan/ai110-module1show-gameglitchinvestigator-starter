@@ -35,7 +35,7 @@ I used claude as my teammate. input were not registering as submitted on first a
 - Did AI help you design or understand any tests? How?
 
 ---
-I manually checked if the bugs were fixed then ran tests using pytest to check for oversights.
+I manually checked if the bugs were fixed then ran tests using pytest to check for oversights. AI alerted me to refactor a  function (check_guess)
 
 ## 4. What did you learn about Streamlit and state?
 

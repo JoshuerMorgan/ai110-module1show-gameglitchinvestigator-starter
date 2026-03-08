@@ -1,36 +1,37 @@
-from logic_utils import check_guess
 import sys
 from unittest.mock import MagicMock
 
+# Mock streamlit before any app import so top-level st calls don't fail
+if "streamlit" not in sys.modules:
+    st_mock = MagicMock()
+    st_mock.sidebar.selectbox.return_value = "Normal"
+    st_mock.columns.return_value = [MagicMock(), MagicMock(), MagicMock()]
+    sys.modules["streamlit"] = st_mock
+
+from app import parse_guess, check_guess, update_score
+
+
 def test_winning_guess():
     # If the secret is 50 and guess is 50, it should be a win
-    result = check_guess(50, 50)
-    assert result == "Win"
+    outcome, _ = check_guess(50, 50)
+    assert outcome == "Win"
+
 
 def test_guess_too_high():
     # If secret is 50 and guess is 60, hint should be "Too High"
-    result = check_guess(60, 50)
-    assert result == "Too High"
+    outcome, _ = check_guess(60, 50)
+    assert outcome == "Too High"
+
 
 def test_guess_too_low():
     # If secret is 50 and guess is 40, hint should be "Too Low"
-    result = check_guess(40, 50)
-    assert result == "Too Low"
+    outcome, _ = check_guess(40, 50)
+    assert outcome == "Too Low"
 
 
 # ---------------------------------------------------------------------------
 # New Game button + Submit button tests
-# app.py has top-level Streamlit calls, so mock st before importing.
 # ---------------------------------------------------------------------------
-
-
-
-if "streamlit" not in sys.modules:
-    st_mock = MagicMock()
-    st_mock.sidebar.selectbox.return_value = "Normal"
-    sys.modules["streamlit"] = st_mock
-
-from app import parse_guess, check_guess as app_check_guess, update_score
 
 
 def fresh_state(secret=50):
@@ -64,7 +65,7 @@ def do_submit(state: dict, raw_guess: str, attempt_limit: int = 8):
         return state, None, err
     state["history"].append(guess_int)
     secret = str(state["secret"]) if state["attempts"] % 2 == 0 else state["secret"]
-    outcome, _ = app_check_guess(guess_int, secret)
+    outcome, _ = check_guess(guess_int, secret)
     state["score"] = update_score(state["score"], outcome, state["attempts"])
     if outcome == "Win":
         state["status"] = "won"
