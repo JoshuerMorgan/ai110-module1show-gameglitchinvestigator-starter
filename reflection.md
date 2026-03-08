@@ -25,7 +25,7 @@ I first read the instructions to understand what the game is about and tried pla
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
 ---
-I used claude as my teammate. 
+I used claude as my teammate. input were not registering as submitted on first attempt and AI sugessted I check the session state attempt to 0 instead of 1.
 
 ## 3. Debugging and testing your fixes
 
@@ -35,6 +35,7 @@ I used claude as my teammate.
 - Did AI help you design or understand any tests? How?
 
 ---
+I manually checked if the bugs were fixed then ran tests using pytest to check for oversights.
 
 ## 4. What did you learn about Streamlit and state?
 

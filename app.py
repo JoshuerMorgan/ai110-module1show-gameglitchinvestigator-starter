@@ -26,6 +26,9 @@ def parse_guess(raw: str):
     except Exception:
         return False, None, "That is not a number."
 
+    if value < 1:
+        return False, None, "Please enter a positive number."
+
     return True, value, None
 
 
@@ -35,16 +38,16 @@ def check_guess(guess, secret):
 
     try:
         if guess < secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too Low", "📉 Go HIGHER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too High", "📈 Go LOWER!"
     except TypeError:
         g = str(guess)
         if g == secret:
             return "Win", "🎉 Correct!"
-        if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+        if g < secret:
+            return "Too Low", "📉 Go HIGHER!"
+        return "Too High", "📈 Go LOWER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
@@ -93,7 +96,7 @@ if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -103,6 +106,9 @@ if "status" not in st.session_state:
 
 if "history" not in st.session_state:
     st.session_state.history = []
+
+if "input_counter" not in st.session_state:
+    st.session_state.input_counter = 0
 
 st.subheader("Make a guess")
 
@@ -120,7 +126,7 @@ with st.expander("Developer Debug Info"):
 
 raw_guess = st.text_input(
     "Enter your guess:",
-    key=f"guess_input_{difficulty}"
+    key=f"guess_input_{difficulty}_{st.session_state.input_counter}"
 )
 
 col1, col2, col3 = st.columns(3)
@@ -134,7 +140,10 @@ with col3:
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
-    st.success("New game started.")
+    st.session_state.status = "playing"
+    st.session_state.history = []
+    st.session_state.score = 0
+    st.session_state.input_counter += 1
     st.rerun()
 
 if st.session_state.status != "playing":
