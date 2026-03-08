@@ -7,12 +7,13 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - What did the game look like the first time you ran it?
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
-I first read the instructions to understand what the game is about and tried playing it, i noticied the following;
 
-- the logic what wrong it just kept saying go lower even with negative numbers.
-- It allows the input of negative numbers. 
-- It automatically just say go lower and does not register the first input submission  
-- the New game does not clear previous inputs to start fresh. 
+I first read the instructions to understand what the game was about and tried playing it. I noticed the following:
+
+- The logic was wrong; it kept saying "go lower" even when negative numbers were entered.
+- It allowed the input of negative numbers.
+- It automatically said "go lower" and did not register the first input submission.
+- The "New Game" button did not clear previous inputs to start fresh.
 
 
 
@@ -25,7 +26,8 @@ I first read the instructions to understand what the game is about and tried pla
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
 ---
-I used claude as my teammate. input were not registering as submitted on first attempt and AI sugessted I check the session state attempt to 0 instead of 1.
+I used Claude as my teammate. The input was not registering as submitted on the first attempt, and the AI suggested that I check whether the session state `attempt` was set to `0` instead of `1`.
+
 
 ## 3. Debugging and testing your fixes
 
@@ -35,7 +37,8 @@ I used claude as my teammate. input were not registering as submitted on first a
 - Did AI help you design or understand any tests? How?
 
 ---
-I manually checked if the bugs were fixed then ran tests using pytest to check for oversights. AI alerted me to refactor a  function (check_guess)
+I manually checked whether the bugs were fixed, then ran tests using `pytest` to check for any oversights. The AI also alerted me to refactor a function called `check_guess`.
+
 
 ## 4. What did you learn about Streamlit and state?
 
@@ -51,3 +54,5 @@ I manually checked if the bugs were fixed then ran tests using pytest to check f
   - This could be a testing habit, a prompting strategy, or a way you used Git.
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+Next time, I will review the code more carefully on my own first so I can gain a deeper understanding of it, rather than just an overview, and better guide the AI in assisting me.
